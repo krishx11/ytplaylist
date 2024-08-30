@@ -8,11 +8,13 @@ exports.searchVideos = async (req, res) => {
       part: 'snippet',
       type: 'video',
       maxResults: 10,
+      key: process.env.YOUTUBE_API_KEY,
     });
     
     res.json(response.data.items);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error fetching YouTube data:", error.message);
+    res.status(500).json({ error: "Failed to fetch YouTube data" });
   }
 };
 
